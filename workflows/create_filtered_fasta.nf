@@ -7,6 +7,7 @@ include { COMBINE_PIN_FILES } from "../modules/combine_pin_files"
 include { ADD_FASTA_TO_COMET_PARAMS } from "../modules/add_fasta_to_comet_params"
 include { FILTER_FASTA} FROM "../modules/filter_fasta"
 include { FIX_FASTA } FROM "../modules/fix_fasta"
+include { GENERATE_DECOYS } FROM "../modules/generate_decoys"
 
 workflow create_filtered_fasta {
 
