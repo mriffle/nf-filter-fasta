@@ -6,6 +6,7 @@ include { FILTER_PIN } from "../modules/filter_pin"
 include { COMBINE_PIN_FILES } from "../modules/combine_pin_files"
 include { ADD_FASTA_TO_COMET_PARAMS } from "../modules/add_fasta_to_comet_params"
 include { FILTER_FASTA} FROM "../modules/filter_fasta"
+include { FIX_FASTA } FROM "../modules/fix_fasta"
 
 workflow create_filtered_fasta {
 
@@ -38,9 +39,17 @@ workflow create_filtered_fasta {
         PERCOLATOR(COMBINE_PIN_FILES.out.combined_pin)
 
         // run filterFasta
-
+        FILTER_FASTA(
+            PERCOLATOR.out.pout,
+            fasta,
+            params.peptide_qvalue_filter,
+            params.psm_qvalue_filter,
+            params.distinct_peptide_count
+        )
 
         // run fastaFixer
+        FIX_FASTA(FILTER_FASTA.out.filtered_pin)
+
 
         // create decoy version
 
