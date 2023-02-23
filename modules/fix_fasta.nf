@@ -14,13 +14,13 @@ process FIX_FASTA {
 
     output:
         path("*.stderr"), emit: stderr
-        path("${filtered_fasta.baseName}.fixed.fasta"), emit: filtered_pin
+        path("${filtered_fasta.baseName}.fixed.fasta"), emit: fixed_fasta
 
     script:
     """
     echo "Fixing FASTA (removing duplicates and invalid residues)"
         ${exec_java_command(task.memory)} \
-        -f {$filtered_fasta} \
+        -f ${filtered_fasta} \
         -r X \
         >${filtered_fasta.baseName}.fixed.fasta \
         2>${filtered_fasta.baseName}.fixed.fasta.stderr

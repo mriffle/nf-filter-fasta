@@ -5,9 +5,9 @@ include { PERCOLATOR } from "../modules/percolator"
 include { FILTER_PIN } from "../modules/filter_pin"
 include { COMBINE_PIN_FILES } from "../modules/combine_pin_files"
 include { ADD_FASTA_TO_COMET_PARAMS } from "../modules/add_fasta_to_comet_params"
-include { FILTER_FASTA} FROM "../modules/filter_fasta"
-include { FIX_FASTA } FROM "../modules/fix_fasta"
-include { GENERATE_DECOYS } FROM "../modules/generate_decoys"
+include { FILTER_FASTA } from "../modules/filter_fasta"
+include { FIX_FASTA } from "../modules/fix_fasta"
+include { GENERATE_DECOYS } from "../modules/generate_decoys"
 
 workflow create_filtered_fasta {
 
@@ -51,9 +51,7 @@ workflow create_filtered_fasta {
         // run fastaFixer
         FIX_FASTA(FILTER_FASTA.out.filtered_pin)
 
-
         // create decoy version
-
-
+        GENERATE_DECOYS(params.decoy_prefix, FIX_FASTA.out.fixed_fasta)
 
 }

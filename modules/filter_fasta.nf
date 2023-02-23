@@ -28,7 +28,7 @@ process FILTER_FASTA {
         -s ${psm_cutoff} \
         -n ${min_peptides_per_protein} \
         -x ${percolator_xml} \
-        -f {$unfiltered_fasta} \
+        -f ${unfiltered_fasta} \
         >${unfiltered_fasta.baseName}.filtered.fasta \
         2>${unfiltered_fasta.baseName}.filtered.fasta.stderr
 

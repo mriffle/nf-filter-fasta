@@ -5,20 +5,18 @@ process GENERATE_DECOYS {
     container 'spctools/tpp:version6.2.0'
 
     input:
+        val decoy_prefix
         path fixed_fasta
 
     output:
         path("*.stderr"), emit: stderr
         path("*.stdout"), emit: stdout
-        path("${fixed_fasta.baseName}.plusdecoys.fasta"), emit: filtered_pin
+        path("${fixed_fasta.baseName}.plusdecoys.fasta"), emit: decoys_fasta
 
     script:
     """
     echo "Generating decoys using TPP..."
-        decoyFastaGenerator.pl \
-        -d 2 \
-        ${fixed_fasta}
-        ${fixed_fasta.baseName}.plusdecoys.fasta
+        decoyFastaGenerator.pl -d 2 ${fixed_fasta} ${decoy_prefix} ${fixed_fasta.baseName}.plusdecoys.fasta \
         >${fixed_fasta.baseName}.plusdecoys.fasta.stdout \
         2>${fixed_fasta.baseName}.plusdecoys.fasta.stderr
 

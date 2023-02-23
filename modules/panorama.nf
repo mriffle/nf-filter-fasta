@@ -44,6 +44,7 @@ process PANORAMA_GET_FASTA {
     container 'mriffle/panorama-client:1.0.0'
     publishDir "${params.result_dir}/panorama", failOnError: true, mode: 'copy', pattern: "*.stdout"
     publishDir "${params.result_dir}/panorama", failOnError: true, mode: 'copy', pattern: "*.stderr"
+    publishDir "${params.result_dir}/fasta", failOnError: true, mode: 'copy', pattern: "*.fasta"
 
     input:
         val web_dav_dir_url
