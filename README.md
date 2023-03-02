@@ -16,7 +16,7 @@ The workflow currently runs:
 ## Parameters
 This workflow accepts the following parameters:
 
-- `comet_params` - `required` Path to the comet params file to use for the search.
+- `comet_params` - `required` Path to the comet params file to use for the search. See https://raw.githubusercontent.com/mriffle/nf-filter-fasta/main/example_files/comet.params for example `comet.params`.
 - `fasta` - `required` Path to the original, unfiltered FASTA file
 - `spectra_dir` - `required` Path to a directory containing either raw or mzML files. If mzML files are found, raw files will be ignored. 
 - `email` - To whom a completion email should be sent. Exclude this parameter to send no email. Default is to send no email.
