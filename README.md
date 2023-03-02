@@ -65,15 +65,20 @@ The output of the pipeline will be placed in the `results/nf-filter-fasta` direc
 - `percolator/combined_filtered.pout.xml` - The percolator results.
 
 ## PanoramaWeb Integration
-This workflow can use FASTA, comet.params, or raw files stored in PanoramaWeb. All file locations that begin with `https://` are assumed to be PanoramaWeb WebDAV URLs. So then to specify PanoramaWeb locations for all input files, the following `pipeline.config` file could be used:
 
-```
-  params {
-    comet_params = 'https://panoramaweb.org/_webdav/FOLDER_PATH/@files/comet.params'
-    fasta = 'https://panoramaweb.org/_webdav/FOLDER_PATH/@files/myname.fasta'
-    spectra_dir  = 'https://panoramaweb.org/_webdav/FOLDER_PATH/@files/FOLDER_NAME/'
-    psm_qvalue_filter = 0.05
-  }
-```
-Note: it is not required that all files be in PanoramaWeb, mixing local and PanoramaWeb files will work.
+1. You must first set up your PanoramaWeb credentials. After finding your API KEY in PanoramaWeb save it to Nextflow by typing:
+
+   `nextflow secrets set PANORAMA_API_KEY "api key from PanoramaWeb"`
+
+2. All file locations that begin with `https://` are assumed to be PanoramaWeb WebDAV URLs. To specify PanoramaWeb locations for all input files, the following `pipeline.config` file could be used:
+
+    ```
+    params {
+        comet_params = 'https://panoramaweb.org/_webdav/FOLDER_PATH/@files/comet.params'
+        fasta = 'https://panoramaweb.org/_webdav/FOLDER_PATH/@files/myname.fasta'
+        spectra_dir  = 'https://panoramaweb.org/_webdav/FOLDER_PATH/@files/FOLDER_NAME/'
+        psm_qvalue_filter = 0.05
+    }
+    ```
+    Note: it is not required that all files be in PanoramaWeb, mixing local and PanoramaWeb files will work.
 
