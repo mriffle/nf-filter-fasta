@@ -57,7 +57,6 @@ process PANORAMA_GET_FASTA {
     script:
         file_name = file(web_dav_dir_url).name
         """
-        echo \$KEY2
         echo "Downloading ${file_name} from Panorama..."
             ${exec_java_command(task.memory)} \
             -d \
