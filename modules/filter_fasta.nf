@@ -3,6 +3,10 @@ def exec_java_command(mem) {
     return "java -Djava.aws.headless=true ${xmx} -jar /usr/local/bin/filterFASTA.jar"
 }
 
+def get_filtered_basename(unfiltered_fasta) {
+    return params.final_fasta_base_name == null ? unfiltered_fasta.baseName : params.final_fasta_base_name
+}
+
 process FILTER_FASTA {
     publishDir "${params.result_dir}/fasta", failOnError: true, mode: 'copy'
     label 'process_low'
@@ -18,7 +22,7 @@ process FILTER_FASTA {
 
     output:
         path("*.stderr"), emit: stderr
-        path("${unfiltered_fasta.baseName}.filtered.fasta"), emit: filtered_pin
+        path("${get_filtered_basename(unfiltered_fasta)}.filtered.fasta"), emit: filtered_pin
 
     script:
     """
@@ -29,14 +33,14 @@ process FILTER_FASTA {
         -n ${min_peptides_per_protein} \
         -x ${percolator_xml} \
         -f ${unfiltered_fasta} \
-        >${unfiltered_fasta.baseName}.filtered.fasta \
-        2>${unfiltered_fasta.baseName}.filtered.fasta.stderr
+        >${get_filtered_basename(unfiltered_fasta)}.filtered.fasta \
+        2>${get_filtered_basename(unfiltered_fasta)}.filtered.fasta.stderr
 
     echo "Done!" # Needed for proper exit
     """
 
     stub:
     """
-    touch "${unfiltered_fasta.baseName}.filtered.fasta"
+    touch "${get_filtered_basename(unfiltered_fasta)}.filtered.fasta"
     """
 }

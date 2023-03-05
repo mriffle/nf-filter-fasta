@@ -24,6 +24,7 @@ This workflow accepts the following parameters:
 - `peptide_qvalue_filter` - Peptides with a q-value greater than this will be excluded when finding quality peptides. Default: `0.01`
 - `distinct_peptide_count` - Proteins with fewer than this many peptides will be excluded from final FASTA. Default: `3`
 - `decoy_prefix` - Generated decoys will have this as a prefix in their name. Default: `DEBRUIJN`
+- `final_fasta_base_name` - Use this name as the base name of the generated FASTA. If left out, will use base name of input FASTA.
 - `mzml_cache_directory` - The cache directory to use when converting raw files to mzML. Default: `/data/mass_spec/nextflow/nf-filter-fasta/mzml_cache`
 - `panorama_cache_directory` - The cache directory to use when downloading raw files from PanoramaWeb. Default: `/data/mass_spec/nextflow/panorama/raw_cache`
 
