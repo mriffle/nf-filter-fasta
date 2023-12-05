@@ -11,6 +11,7 @@ process FILTER_FASTA {
     publishDir "${params.result_dir}/fasta", failOnError: true, mode: 'copy'
     label 'process_low'
     label 'process_high_memory'
+    label 'process_long'
     container 'quay.io/protio/filter-fasta:1.3.2'
 
     input:
