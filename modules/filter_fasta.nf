@@ -34,6 +34,7 @@ process FILTER_FASTA {
         -n ${min_peptides_per_protein} \
         -x ${percolator_xml} \
         -f ${unfiltered_fasta} \
+        --skip-validation \
         >${get_filtered_basename(unfiltered_fasta)}.filtered.fasta \
         2>${get_filtered_basename(unfiltered_fasta)}.filtered.fasta.stderr
 
