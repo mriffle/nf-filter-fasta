@@ -32,8 +32,9 @@ workflow create_filtered_fasta {
 
         // run comet
         COMET(mzml_file_ch, new_comet_params, fasta)
-        FILTER_PIN(COMET.out.pin)
-        filtered_pin_files = FILTER_PIN.out.filtered_pin.collect()
+        // FILTER_PIN(COMET.out.pin)
+        
+        filtered_pin_files = COMET.out.pin.collect()
 
         // run percolator
         COMBINE_PIN_FILES(filtered_pin_files)
