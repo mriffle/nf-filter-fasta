@@ -7,7 +7,7 @@ def exec_java_command(mem) {
 
 process PANORAMA_GET_RAW_FILE_LIST {
     label 'process_low_constant'
-    container 'mriffle/panorama-client:1.0.0'
+    container 'mriffle/panorama-client:1.1.0'
     publishDir "${params.result_dir}/panorama", failOnError: true, mode: 'copy'
 
     input:
@@ -41,7 +41,7 @@ process PANORAMA_GET_RAW_FILE_LIST {
 
 process PANORAMA_GET_FASTA {
     label 'process_low_constant'
-    container 'mriffle/panorama-client:1.0.0'
+    container 'mriffle/panorama-client:1.1.0'
     publishDir "${params.result_dir}/panorama", failOnError: true, mode: 'copy', pattern: "*.stdout"
     publishDir "${params.result_dir}/panorama", failOnError: true, mode: 'copy', pattern: "*.stderr"
     publishDir "${params.result_dir}/fasta", failOnError: true, mode: 'copy', pattern: "*.fasta"
@@ -74,7 +74,7 @@ process PANORAMA_GET_FASTA {
 
 process PANORAMA_GET_COMET_PARAMS {
     label 'process_low_constant'
-    container 'mriffle/panorama-client:1.0.0'
+    container 'mriffle/panorama-client:1.1.0'
     publishDir "${params.result_dir}/panorama", failOnError: true, mode: 'copy', pattern: "*.stdout"
     publishDir "${params.result_dir}/panorama", failOnError: true, mode: 'copy', pattern: "*.stderr"
 
@@ -107,7 +107,7 @@ process PANORAMA_GET_COMET_PARAMS {
 process PANORAMA_GET_RAW_FILE {
     label 'process_low_constant'
     maxForks 8
-    container 'quay.io/protio/panorama-client:1.0.0'
+    container 'quay.io/protio/panorama-client:1.1.0'
     storeDir "${params.panorama_cache_directory}"
 
     input:
