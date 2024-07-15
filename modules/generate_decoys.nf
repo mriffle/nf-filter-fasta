@@ -2,7 +2,7 @@
 process GENERATE_DECOYS {
     publishDir "${params.result_dir}/fasta", failOnError: true, mode: 'copy'
     label 'process_low'
-    container 'spctools/tpp:version6.2.0'
+    container 'mriffle/yarp:1.2.0'
 
     input:
         val decoy_prefix
@@ -15,16 +15,16 @@ process GENERATE_DECOYS {
 
     script:
     """
-    echo "Generating decoys using TPP..."
-        decoyFastaGenerator.pl -d 2 ${fixed_fasta} ${decoy_prefix} ${fixed_fasta.baseName}.plusdecoys.fasta \
-        >${fixed_fasta.baseName}.plusdecoys.fasta.stdout \
+    echo "Generating decoys using YARP!..."
+        yarp \
+        --fasta-file ${fixed_fasta} \
+        --decoy-prefix ${decoy_prefix} \
+        --decoy-method reverse \
+        --protease trypsin \
+        --seed 42 \
+        >${fixed_fasta.baseName}.plusdecoys.fasta \
         2>${fixed_fasta.baseName}.plusdecoys.fasta.stderr
 
     echo "Done!" # Needed for proper exit
-    """
-
-    stub:
-    """
-    touch "${fixed_fasta.baseName}.plusdecoys.fasta"
     """
 }
