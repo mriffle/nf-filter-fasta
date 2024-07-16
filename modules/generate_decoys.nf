@@ -10,7 +10,6 @@ process GENERATE_DECOYS {
 
     output:
         path("*.stderr"), emit: stderr
-        path("*.stdout"), emit: stdout
         path("${fixed_fasta.baseName}.plusdecoys.fasta"), emit: decoys_fasta
 
     script:
